@@ -23,7 +23,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   const currentLinks = isLoggedIn
     ? [...links.public, ...links.private]
