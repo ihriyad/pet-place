@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@heroui/react";
 import { useTheme } from "next-themes";
 import React from "react";
 import { BiMoon } from "react-icons/bi";
@@ -9,7 +10,7 @@ const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+    <Button variant="outline" className=" rounded-full p-3" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
       {theme === "light" ? (
         <>
           <BiMoon></BiMoon>
@@ -19,7 +20,7 @@ const ThemeSwitcher = () => {
           <FiSun />
         </>
       )}
-    </button>
+    </Button>
   );
 };
 
