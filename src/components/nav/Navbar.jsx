@@ -3,37 +3,35 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button } from "@heroui/react";
+import { Avatar, Button } from "@heroui/react";
 import { RiMenu2Line, RiCloseLine } from "react-icons/ri";
 import { FaPaw } from "react-icons/fa";
 import ThemeSwitcher from "../theme/ThemeSwitcher";
+import { authClient } from "@/lib/auth-client";
 
-const links = {
-  public: [
-    { label: "Home", href: "/" },
-    { label: "All Pets", href: "/pets" },
-  ],
-  private: [
-    { label: "My Requests", href: "/my-requests" },
-    { label: "Add Pet", href: "/add-pet" },
-  ],
-};
+const links = [
+  { label: "Home", href: "/" },
+  { label: "All Pets", href: "/pets" },
+  { label: "My Requests", href: "/my-requests", isPrivate: true },
+  { label: "Add Pet", href: "/add-pet", isPrivate: true },
+];
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const isLoggedIn = false;
-
-  const currentLinks = isLoggedIn
-    ? [...links.public, ...links.private]
-    : links.public;
+  const { data: session, isPending, error, refetch } = authClient.useSession();
+  const user = session?.user;
+  console.log(user, "user from navbar");
 
   const isActive = (href) => pathname === href;
+
+  const visibleLinks = links.filter((link) => !link.isPrivate || user);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-divider backdrop-blur-md">
       <nav className="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center relative">
+        {/* mobile menu */}
         <div className="flex md:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -44,6 +42,7 @@ const Navbar = () => {
           </button>
         </div>
 
+        {/*logo */}
         <Link
           href="/"
           className="flex items-center gap-2 font-bold tracking-wider text-xl uppercase w-fit"
@@ -56,7 +55,7 @@ const Navbar = () => {
         </Link>
 
         <ul className="hidden md:flex items-center gap-6">
-          {currentLinks.map((link) => (
+          {visibleLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
@@ -72,33 +71,39 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <div className="flex items-center">
+        <div className="flex items-center gap-3">
           <ThemeSwitcher />
 
-          {isLoggedIn ? (
-            <Link href="/dashboard">
-              <Button
-                color="warning"
-                variant="flat"
-                size="sm"
-                className="font-semibold"
-              >
-                Dashboard
-              </Button>
-            </Link>
-          ) : (
-            <Link href="/login">
-              <Button variant="secondary" size="sm" className="font-semibold">
-                Login
-              </Button>
-            </Link>
+          {!isPending && (
+            <>
+              {user ? (
+                <Link href="/dashboard">
+                  <Avatar
+                    name={user?.name?.[0]}
+                    src={user?.image}
+                    size="sm"
+                    color="warning"
+                  />
+                </Link>
+              ) : (
+                <Link href="/login">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="font-semibold"
+                  >
+                    Login
+                  </Button>
+                </Link>
+              )}
+            </>
           )}
         </div>
 
         {isMenuOpen && (
           <div className="absolute top-16 left-0 w-full bg-background border-b border-divider md:hidden shadow-lg animate-in fade-in slide-in-from-top-2 duration-200">
             <ul className="flex flex-col gap-1 p-4">
-              {currentLinks.map((link) => (
+              {visibleLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
