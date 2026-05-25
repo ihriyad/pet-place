@@ -44,10 +44,14 @@ const Navbar = () => {
           </button>
         </div>
 
-        <Link href="/" className="flex items-center gap-1 font-bold">
-          <FaPaw className="text-2xl" />
+        <Link
+          href="/"
+          className="flex items-center gap-2 font-bold tracking-wider text-xl uppercase w-fit"
+        >
+          <FaPaw className="text-warning text-2xl" />
           <h2>
-            <span className="text-cyan-500">Pet</span>Place
+            Pet
+            <span className="text-warning uppercase">Place</span>
           </h2>
         </Link>
 
@@ -68,7 +72,7 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center">
           <ThemeSwitcher />
 
           {isLoggedIn ? (
