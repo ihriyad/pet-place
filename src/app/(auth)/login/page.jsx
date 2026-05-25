@@ -11,13 +11,35 @@ import {
   Separator,
 } from "@heroui/react";
 import { FaGoogle } from "react-icons/fa";
+import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 const LoginPage = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({ email, password });
-  };
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const user = Object.fromEntries(formData.entries());
+
+    // console.log(user);
+
+    const { data, error } = await authClient.signIn.email({
+      email: user.email,
+      password: user.password,
+    });
+    if (data) {
+      alert("Login Success");
+      redirect("/");
+    }
+    if (error) {
+      alert("Login failed");
+    }
+  };
+  const handleGoogleSignin = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
   return (
     <div className=" flex items-center justify-center  py-2 bg-default-50/50">
       <div className="w-full max-w-[540px] bg-background rounded-sm  p-8 md:p-12 ">
@@ -30,7 +52,7 @@ const LoginPage = () => {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        <form onSubmit={onSubmit} className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
             <TextField
               isRequired
@@ -91,6 +113,7 @@ const LoginPage = () => {
           <Separator className="flex-1" />
         </div>
         <Button
+          onClick={handleGoogleSignin}
           type="submit"
           radius="full"
           size="sm"

@@ -13,17 +13,39 @@ import {
 } from "@heroui/react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { FaGoogle } from "react-icons/fa";
+import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordValue, setPasswordValue] = useState("");
 
-  const handleSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-    console.log(data);
+    const user = Object.fromEntries(formData.entries());
+
+    // console.log(user);
+
+    const { data, error } = await authClient.signUp.email({
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      image: user.image,
+    });
+    if (data) {
+      alert("SignUp Success");
+      redirect("/");
+    }
+    if (error) {
+      alert("sign Up failed");
+    }
+  };
+  const handleGoogleSignin = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
   };
 
   return (
@@ -38,7 +60,7 @@ const RegisterPage = () => {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        <form onSubmit={onSubmit} className="flex flex-col gap-6">
           <div className="flex flex-col gap-4">
             <TextField isRequired name="name" type="text">
               <Label>Full Name</Label>
@@ -150,6 +172,7 @@ const RegisterPage = () => {
           <Separator className="flex-1" />
         </div>
         <Button
+          onClick={handleGoogleSignin}
           type="submit"
           radius="full"
           size="sm"
