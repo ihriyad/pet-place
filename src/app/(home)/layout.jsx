@@ -1,3 +1,4 @@
+import FeaturedPets from "@/components/featured/FeaturedPets";
 import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/nav/Navbar";
 import EndCTA from "@/components/statics/EndCTA";
@@ -13,6 +14,7 @@ const MainLayout = ({ children }) => {
     <main>
       <Navbar></Navbar>
       {children}
+      <FeaturedPets></FeaturedPets>
       <WhyAdopt></WhyAdopt>
       <SuccessStories></SuccessStories>
       <PetCareTips></PetCareTips>
