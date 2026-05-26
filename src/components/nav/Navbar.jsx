@@ -13,7 +13,7 @@ import { ProfileDropdown } from "../profile/ProfileDropdown";
 const links = [
   { label: "Home", href: "/" },
   { label: "All Pets", href: "/all_pets" },
-  { label: "My Requests", href: "/dashboard/my_requests", isPrivate: true },
+  { label: "My Requests", href: "/dashboard/my_request", isPrivate: true },
   { label: "Add Pet", href: "/dashboard/add_pet", isPrivate: true },
 ];
 

@@ -1,9 +1,10 @@
+import AddPet from '@/components/dashboard/AddPet';
 import React from 'react';
 
 const AddPetPage = () => {
     return (
         <div>
-            You can add pets here
+            <AddPet></AddPet>
         </div>
     );
 };

@@ -18,7 +18,7 @@ const DashboardLayout = ({ children }) => {
   const pathname = usePathname();
 
   return (
-    <div className="min-h-screen flex bg-default-50">
+    <section className="h-screen flex bg-default-50">
       {/* mobile*/}
       {open && (
         <div
@@ -74,7 +74,7 @@ const DashboardLayout = ({ children }) => {
         </header>
         <main className="flex-1 p-4 lg:p-8 overflow-y-auto">{children}</main>
       </div>
-    </div>
+    </section>
   );
 };
 export default DashboardLayout;
