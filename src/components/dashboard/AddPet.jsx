@@ -117,9 +117,6 @@ const AddPet = () => {
                 placeholder="https://imgbb.com/your-image-link"
                 variant="bordered"
                 radius="sm"
-                endContent={
-                  <FaCloudUploadAlt className="text-foreground-400 text-lg" />
-                }
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -133,11 +130,6 @@ const AddPet = () => {
                 placeholder="0.00"
                 variant="bordered"
                 radius="sm"
-                startContent={
-                  <div className="pointer-events-none flex items-center">
-                    <span className="text-foreground-400 text-sm">$</span>
-                  </div>
-                }
               />
             </div>
           </div>
@@ -189,12 +181,10 @@ const AddPet = () => {
               Description <span className="text-danger">*</span>
             </label>
             <TextArea
-              isRequired
               name="description"
               placeholder="Tell potential adopters about your pet's habits and unique personality..."
               variant="bordered"
               radius="sm"
-              minRows={4}
             />
           </div>
 
@@ -204,10 +194,9 @@ const AddPet = () => {
                 Owner Contact Email
               </label>
               <Input
-                isReadOnly
                 type="email"
                 name="ownerEmail"
-                value={ownerEmail}
+                placeholder={ownerEmail}
                 variant="flat"
                 radius="sm"
                 className="cursor-not-allowed"
