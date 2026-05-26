@@ -97,7 +97,7 @@ const Hero = () => {
           <div className="col-span-7 aspect-[3/4] rounded-2xl overflow-hidden bg-default-100 border border-divider shadow-md relative group">
             <Image
               fill
-              src="/dogimage1.png"
+              src="/dogimage3.png"
               alt="Golden retriever up for adoption"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
@@ -115,7 +115,7 @@ const Hero = () => {
             <div className="aspect-square rounded-2xl overflow-hidden bg-default-100 border border-divider shadow-sm relative group">
               <Image
                 fill
-                src="/dogimage2.png"
+                src="/dogimage1.png"
                 alt="French bulldog puppy"
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
