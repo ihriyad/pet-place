@@ -111,9 +111,9 @@ const LoginPage = () => {
           <Button
             type="submit"
             radius="full"
-            variant="secondary"
+            variant="outline"
             size="sm"
-            className="w-full h-12 font-semibold text-base transition-transform active:scale-[0.98] mt-2"
+            className="w-full text-warning h-12 font-semibold text-base transition-transform active:scale-[0.98] mt-2"
             isLoading={isLoading}
             disabled={isLoading}
           >
@@ -133,8 +133,8 @@ const LoginPage = () => {
           type="button" // Fixed type definition
           radius="full"
           size="sm"
-          variant="secondary"
-          className="w-full h-12 transition-transform active:scale-[0.98]"
+          variant="outline"
+          className="w-full text-warning h-12 transition-transform active:scale-[0.98]"
         >
           <FcGoogle className="text-lg" /> Continue with Google
         </Button>

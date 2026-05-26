@@ -175,13 +175,13 @@ const RegisterPage = () => {
           </div>
 
           <Button
-            variant="secondary"
+            variant="outline"
             type="submit"
             radius="full"
             size="sm"
             isLoading={isLoading}
             disabled={isLoading}
-            className="w-full font-semibold text-base h-12 transition-transform active:scale-[0.98] mt-2"
+            className="w-full text-warning font-semibold text-base h-12 transition-transform active:scale-[0.98] mt-2"
           >
             Sign Up
           </Button>
@@ -196,11 +196,11 @@ const RegisterPage = () => {
         <Button
           onClick={handleGoogleSignin}
           type="button"
-          variant="secondary"
+          variant="outline"
           radius="full"
           size="sm"
           disabled={isLoading}
-          className="w-full h-12 transition-transform active:scale-[0.98]"
+          className="w-full h-12 text-warning transition-transform active:scale-[0.98]"
         >
           <FcGoogle /> Continue with Google
         </Button>

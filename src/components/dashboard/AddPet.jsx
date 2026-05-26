@@ -4,17 +4,18 @@ import React from "react";
 import { Input, Button, TextArea } from "@heroui/react";
 import { FaPaw, FaCloudUploadAlt } from "react-icons/fa";
 import { authClient } from "@/lib/auth-client";
+import { addPetInfo } from "@/lib/actions";
 
 const AddPet = () => {
   const { data: session } = authClient.useSession();
   const ownerEmail = session?.user?.email || "loading@petplace.com";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const petData = Object.fromEntries(formData.entries());
-    console.log("Form Data Submitted:", petData);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData(e.currentTarget);
+  //   const petData = Object.fromEntries(formData.entries());
+  //   console.log("Form Data Submitted:", petData);
+  // };
 
   return (
     <div className="bg-default-50/30 px-4 sm:px-6 lg:px-8">
@@ -33,7 +34,7 @@ const AddPet = () => {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        <form action={addPetInfo} className="flex flex-col gap-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-foreground">
