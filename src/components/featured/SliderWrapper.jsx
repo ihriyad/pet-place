@@ -103,7 +103,6 @@ const SliderWrapper = ({ pets }) => {
                         color="warning"
                         size="lg"
                         radius="full"
-                        endContent={<FaPaw />}
                         className="font-bold bg-warning text-black shadow-xl shadow-warning/10 h-12 px-6"
                       >
                         Adopt Now

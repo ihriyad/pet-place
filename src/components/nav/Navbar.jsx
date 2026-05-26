@@ -85,18 +85,9 @@ const Navbar = () => {
                     <Button
                       variant="secondary"
                       size="sm"
-                      className="font-semibold "
+                      className="font-semibold text-warning"
                     >
                       Login
-                    </Button>
-                  </Link>
-                  <Link href="/register">
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      className="font-semibold"
-                    >
-                      Get Started
                     </Button>
                   </Link>
                 </>

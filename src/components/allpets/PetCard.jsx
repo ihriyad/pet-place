@@ -49,7 +49,6 @@ const PetCard = ({ pet }) => {
       </div>
 
       <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent pt-20 pb-5 px-5 flex flex-col justify-end text-white z-10">
-
         <div className="flex items-center justify-between gap-2 mb-1">
           <h3 className="text-xl font-bold tracking-tight truncate drop-shadow-sm">
             {petName}
@@ -59,24 +58,20 @@ const PetCard = ({ pet }) => {
           </div>
         </div>
 
-
         <p className="text-xs font-medium text-default-300 mb-3 truncate">
           {breed} • <span className="text-warning font-semibold">{age}</span>
         </p>
-
 
         <div className="flex items-center gap-1.5 text-xs text-default-400 mb-4">
           <FaMapMarkerAlt className="text-warning/80 shrink-0" />
           <span className="truncate">{location}</span>
         </div>
 
-
         <Link href={`/pets/${_id}`} className="w-full">
           <Button
             size="sm"
             color="warning"
             radius="md"
-            endContent={<FaPaw className="text-xs" />}
             className="w-full font-semibold bg-warning text-black hover:bg-warning-400 transition-colors shadow-lg shadow-warning/10"
           >
             Meet {petName}

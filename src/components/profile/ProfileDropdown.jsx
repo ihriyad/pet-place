@@ -4,7 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import { Avatar, Button, Dropdown, Label } from "@heroui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { IoIosArrowDropdown } from "react-icons/io";
+import { IoIosArrowDropdown, IoIosArrowDropdownCircle } from "react-icons/io";
 
 export function ProfileDropdown({ user }) {
   const router = useRouter();
@@ -29,7 +29,8 @@ export function ProfileDropdown({ user }) {
           <Avatar.Image alt="user image" src={user?.image} />
           <Avatar.Fallback>{user?.name?.[0]}</Avatar.Fallback>
         </Avatar>
-        <IoIosArrowDropdown />
+        <IoIosArrowDropdownCircle />
+
       </Button>
       <Dropdown.Popover>
         <Dropdown.Menu

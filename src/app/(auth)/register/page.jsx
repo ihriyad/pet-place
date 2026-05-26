@@ -12,36 +12,48 @@ import {
   Separator,
 } from "@heroui/react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import { FaGoogle } from "react-icons/fa";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
+import toast from "react-hot-toast";
 
 const RegisterPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordValue, setPasswordValue] = useState("");
+  const router = useRouter();
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
 
-    // console.log(user);
+    try {
+      const { data, error } = await authClient.signUp.email({
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        image: user.image,
+      });
 
-    const { data, error } = await authClient.signUp.email({
-      name: user.name,
-      email: user.email,
-      password: user.password,
-      image: user.image,
-    });
-    if (data) {
-      alert("SignUp Success");
-      redirect("/");
-    }
-    if (error) {
-      alert("sign Up failed");
+      if (data) {
+        toast.success("SignUp Success");
+        router.push("/");
+        router.refresh();
+      }
+      if (error) {
+        toast.warning(error.message || "sign Up failed");
+        setIsLoading(false);
+      }
+    } catch (err) {
+      alert("An unexpected error occurred");
+      setIsLoading(false);
     }
   };
+
   const handleGoogleSignin = async () => {
     await authClient.signIn.social({
       provider: "google",
@@ -64,7 +76,7 @@ const RegisterPage = () => {
           <div className="flex flex-col gap-4">
             <TextField isRequired name="name" type="text">
               <Label>Full Name</Label>
-              <Input placeholder="John Doe" />
+              <Input placeholder="John Doe" disabled={isLoading} />
               <FieldError />
             </TextField>
 
@@ -80,13 +92,16 @@ const RegisterPage = () => {
               }}
             >
               <Label>Email</Label>
-              <Input placeholder="john@example.com" />
+              <Input placeholder="john@example.com" disabled={isLoading} />
               <FieldError />
             </TextField>
 
             <TextField name="image" type="url">
               <Label>Profile Image URL (Optional)</Label>
-              <Input placeholder="https://example.com/avatar.jpg" />
+              <Input
+                placeholder="https://example.com/avatar.jpg"
+                disabled={isLoading}
+              />
               <FieldError />
             </TextField>
 
@@ -110,7 +125,11 @@ const RegisterPage = () => {
             >
               <Label>Password</Label>
               <div className="relative flex items-center">
-                <Input placeholder="Enter your password" className="w-full" />
+                <Input
+                  placeholder="Enter your password"
+                  className="w-full"
+                  disabled={isLoading}
+                />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -141,6 +160,7 @@ const RegisterPage = () => {
                 <Input
                   placeholder="Re-enter your password"
                   className="w-full"
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
@@ -155,30 +175,34 @@ const RegisterPage = () => {
           </div>
 
           <Button
+            variant="secondary"
             type="submit"
             radius="full"
             size="sm"
-            className="w-full bg-warning text-gray-800 font-semibold text-base h-12 shadow-sm transition-transform active:scale-[0.98] mt-2"
+            isLoading={isLoading}
+            disabled={isLoading}
+            className="w-full font-semibold text-base h-12 transition-transform active:scale-[0.98] mt-2"
           >
             Sign Up
           </Button>
         </form>
 
-        <div className="flex items-center gap-2 my-2">
+        <div className="flex items-center gap-2 my-4">
           <Separator className="flex-1" />
-
           <p className="text-sm text-gray-500">OR</p>
-
           <Separator className="flex-1" />
         </div>
+
         <Button
           onClick={handleGoogleSignin}
-          type="submit"
+          type="button"
+          variant="secondary"
           radius="full"
           size="sm"
-          className="w-full bg-warning text-gray-800 h-12 shadow-sm transition-transform active:scale-[0.98] mt-2"
+          disabled={isLoading}
+          className="w-full h-12 transition-transform active:scale-[0.98]"
         >
-          <FaGoogle /> Continue with Google
+          <FcGoogle /> Continue with Google
         </Button>
 
         <p className="text-xs text-foreground-400 text-center mt-4 leading-relaxed">

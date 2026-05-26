@@ -196,7 +196,8 @@ const AddPet = () => {
               <Input
                 type="email"
                 name="ownerEmail"
-                placeholder={ownerEmail}
+                readOnly
+                defaultValue={ownerEmail}
                 variant="flat"
                 radius="sm"
                 className="cursor-not-allowed"
