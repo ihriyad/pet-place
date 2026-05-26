@@ -9,6 +9,7 @@ import {
   FaGenderless,
   FaMars,
   FaVenus,
+  FaExternalLinkAlt,
 } from "react-icons/fa";
 import Image from "next/image";
 
@@ -67,15 +68,12 @@ const PetCard = ({ pet }) => {
           <span className="truncate">{location}</span>
         </div>
 
-        <Link href={`/pets/${_id}`} className="w-full">
-          <Button
-            size="sm"
-            color="warning"
-            radius="md"
-            className="w-full font-semibold bg-warning text-black hover:bg-warning-400 transition-colors shadow-lg shadow-warning/10"
-          >
-            Meet {petName}
-          </Button>
+        <Link
+          href={`/all_pets/${_id}`}
+          className="flex items-center gap-1 hover:underline"
+        >
+          Meet<span className="text-warning">{petName}</span>
+          <FaExternalLinkAlt />
         </Link>
       </div>
     </div>

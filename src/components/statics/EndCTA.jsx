@@ -23,13 +23,13 @@ const EndCTA = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
-            href="/all-pets"
+            href="/all_pets"
             className="w-full sm:w-auto px-6 py-3 rounded-full bg-warning/20 text-warning font-semibold text-sm hover:bg-warning/30 transition-colors"
           >
             Find a pet
           </Link>
           <Link
-            href="/add-pet"
+            href="/dashboard/my_listing"
             className="w-full sm:w-auto px-6 py-3 rounded-full border border-divider text-foreground-500 font-semibold text-sm hover:border-warning hover:text-warning transition-colors"
           >
             Rehome a pet

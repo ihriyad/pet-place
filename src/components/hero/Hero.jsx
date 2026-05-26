@@ -66,7 +66,7 @@ const Hero = () => {
             animate="visible"
             className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
           >
-            <Link href="/all-pets">
+            <Link href="/all_pets">
               <Button
                 radius="full"
                 size="lg"
@@ -75,7 +75,7 @@ const Hero = () => {
                 Browse Pets
               </Button>
             </Link>
-            <Link href="/add-pet">
+            <Link href="/dashboard/my_listing">
               <Button
                 variant="outline"
                 radius="full"

@@ -10,6 +10,7 @@ import {
   FaChevronRight,
   FaPaw,
   FaMapMarkerAlt,
+  FaExternalLinkAlt,
 } from "react-icons/fa";
 import Link from "next/link";
 
@@ -98,15 +99,8 @@ const SliderWrapper = ({ pets }) => {
                   </div>
 
                   <div className="shrink-0">
-                    <Link href={`/pets/${pet._id}`}>
-                      <Button
-                        color="warning"
-                        size="lg"
-                        radius="full"
-                        className="font-bold bg-warning text-black shadow-xl shadow-warning/10 h-12 px-6"
-                      >
-                        Adopt Now
-                      </Button>
+                    <Link href={`/all_pets/${pet._id}`} className="flex items-center gap-3 text-warning">
+                      View Details <FaExternalLinkAlt />
                     </Link>
                   </div>
                 </motion.div>

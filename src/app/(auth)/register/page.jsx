@@ -208,14 +208,14 @@ const RegisterPage = () => {
         <p className="text-xs text-foreground-400 text-center mt-4 leading-relaxed">
           By signing up, you acknowledge that you understand and accept our{" "}
           <Link
-            href="/privacy"
+            href="/register"
             className="text-foreground-500 underline hover:text-foreground"
           >
             Privacy Policy
           </Link>{" "}
           and{" "}
           <Link
-            href="/terms"
+            href="/register"
             className="text-foreground-500 underline hover:text-foreground"
           >
             Terms of Use

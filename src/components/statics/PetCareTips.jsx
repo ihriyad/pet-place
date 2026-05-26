@@ -60,7 +60,7 @@ const PetCareTips = () => {
               </div>
 
               <h3 className="text-base font-bold text-foreground mb-2 line-clamp-2 hover:text-warning transition-colors">
-                <Link href={`/blog/${i}`}>{tip.title}</Link>
+                <Link href={`#`}>{tip.title}</Link>
               </h3>
 
               <p className="text-sm text-foreground-500 leading-relaxed line-clamp-3">
@@ -71,7 +71,7 @@ const PetCareTips = () => {
             <div className="pt-4 mt-5 border-t border-divider flex items-center justify-between text-xs text-foreground-400">
               <span>{tip.date}</span>
               <Link
-                href={`/blog/${i}`}
+                href={`#`}
                 className="text-warning font-semibold hover:underline "
               >
                 Read more
@@ -82,12 +82,7 @@ const PetCareTips = () => {
       </div>
 
       <p className="text-sm text-warning font-semibold underline text-center my-6">
-        <Link
-        href="/blog"
-        
-      >
-        All articles
-      </Link>
+        <Link href="#">All articles</Link>
       </p>
     </section>
   );
