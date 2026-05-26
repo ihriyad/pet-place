@@ -8,6 +8,7 @@ import { RiMenu2Line, RiCloseLine } from "react-icons/ri";
 import { FaPaw } from "react-icons/fa";
 import ThemeSwitcher from "../theme/ThemeSwitcher";
 import { authClient } from "@/lib/auth-client";
+import { ProfileDropdown } from "../profile/ProfileDropdown";
 
 const links = [
   { label: "Home", href: "/" },
@@ -22,7 +23,7 @@ const Navbar = () => {
 
   const { data: session, isPending, error, refetch } = authClient.useSession();
   const user = session?.user;
-  console.log(user, "user from navbar");
+  // console.log(user, "user from navbar");
 
   const isActive = (href) => pathname === href;
 
@@ -77,20 +78,16 @@ const Navbar = () => {
           {!isPending && (
             <>
               {user ? (
-                <Link href="/dashboard">
-                  <Avatar
-                    name={user?.name?.[0]}
-                    src={user?.image}
-                    size="sm"
-                    color="warning"
-                  />
-                </Link>
+                
+                
+                <ProfileDropdown user={user}></ProfileDropdown>
+               
               ) : (
                 <Link href="/login">
                   <Button
                     variant="secondary"
                     size="sm"
-                    className="font-semibold"
+                    className="font-semibold text-danger"
                   >
                     Login
                   </Button>
