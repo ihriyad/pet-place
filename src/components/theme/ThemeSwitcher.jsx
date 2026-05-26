@@ -10,7 +10,7 @@ const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <Button variant="outline" className=" rounded-full p-3" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+    <Button variant="ghost" className="rounded-full p-3" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
       {theme === "light" ? (
         <>
           <BiMoon></BiMoon>

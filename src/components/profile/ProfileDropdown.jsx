@@ -32,24 +32,20 @@ export function ProfileDropdown({ user }) {
         <IoIosArrowDropdown />
       </Button>
       <Dropdown.Popover>
-        <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
-          <Dropdown.Item id="new-file" textValue="New file">
-            <Label>
-              <Link href={"/profile"}>Profile</Link>
-            </Label>
+        <Dropdown.Menu
+          onAction={(key) => {
+            if (key === "profile") router.push("/profile");
+            if (key === "dashboard") router.push("/dashboard");
+            if (key === "logout") handleSignOut();
+          }}
+        >
+          <Dropdown.Item id="profile" textValue="Profile">
+            <Label>Profile</Label>
           </Dropdown.Item>
-          <Dropdown.Item id="copy-link" textValue="Copy link">
-            <Label>
-              <Link href={"/dashboard"}>Dashboard</Link>
-            </Label>
+          <Dropdown.Item id="dashboard" textValue="Dashboard">
+            <Label>Dashboard</Label>
           </Dropdown.Item>
-
-          <Dropdown.Item
-            id="delete-file"
-            textValue="Delete file"
-            variant="danger"
-            onClick={handleSignOut}
-          >
+          <Dropdown.Item id="logout" textValue="Log Out" variant="danger">
             <Label>Log Out</Label>
           </Dropdown.Item>
         </Dropdown.Menu>

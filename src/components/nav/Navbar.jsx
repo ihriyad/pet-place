@@ -78,20 +78,28 @@ const Navbar = () => {
           {!isPending && (
             <>
               {user ? (
-                
-                
                 <ProfileDropdown user={user}></ProfileDropdown>
-               
               ) : (
-                <Link href="/login">
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    className="font-semibold text-danger"
-                  >
-                    Login
-                  </Button>
-                </Link>
+                <>
+                  <Link href="/login">
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      className="font-semibold "
+                    >
+                      Login
+                    </Button>
+                  </Link>
+                  <Link href="/register">
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      className="font-semibold"
+                    >
+                      Get Started
+                    </Button>
+                  </Link>
+                </>
               )}
             </>
           )}
