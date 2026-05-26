@@ -12,9 +12,9 @@ import { ProfileDropdown } from "../profile/ProfileDropdown";
 
 const links = [
   { label: "Home", href: "/" },
-  { label: "All Pets", href: "/pets" },
+  { label: "All Pets", href: "/all_pets" },
   { label: "My Requests", href: "/my-requests", isPrivate: true },
-  { label: "Add Pet", href: "/add-pet", isPrivate: true },
+  { label: "Add Pet", href: "/add_pet", isPrivate: true },
 ];
 
 const Navbar = () => {
