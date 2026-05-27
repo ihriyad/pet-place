@@ -26,9 +26,10 @@ export const getPetById = async (id) => {
   return pet;
 };
 
-
 export const getMyListings = async (email) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SEVER_URL}/my_listing/${email}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SEVER_URL}/my_listing/${email}`,
+  );
   const pets = await res.json();
   return pets;
 };
@@ -37,14 +38,34 @@ export const deletePet = async (id, email) => {
   console.log(id, email, "from delete handle");
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SEVER_URL}/all_pets/${id}?email=${email}`,
-    { method: "DELETE" ,
-       headers: {
+    {
+      method: "DELETE",
+      headers: {
         "Content-type": "application/json",
       },
-     }
+    },
   );
   const data = await res.json();
   // console.log(data);
 
+  return data;
+};
+
+export const handleEditPet = async (editedPet, id) => {
+  // console.log(editedPet, id);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SEVER_URL}/all_pets/${id}`,
+    {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(editedPet),
+    },
+  );
+  const data = await res.json();
+  if (data.modifiedCount === 1) {
+    window.location.reload();
+  }
   return data;
 };

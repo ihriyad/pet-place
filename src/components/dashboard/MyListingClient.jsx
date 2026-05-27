@@ -3,11 +3,14 @@ import { deletePet } from "@/lib/actions";
 import { Button } from "@heroui/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import React from "react";
 import { FaPaw } from "react-icons/fa";
+import EditPetModal from "./EditPetModal";
 
 const MyListingClient = ({ pets, email }) => {
   const router = useRouter();
+
   if (pets.length === 0)
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
@@ -20,20 +23,43 @@ const MyListingClient = ({ pets, email }) => {
         </p>
       </div>
     );
+
   const handleDelete = async (id) => {
     const data = await deletePet(id, email);
     if (data.deletedCount === 1) {
       router.refresh();
     }
   };
+
+  const available = pets.filter((p) => !p.adopted).length;
+  const adopted = pets.filter((p) => p.adopted).length;
+
   return (
-    <div className="flex flex-col gap-4">
-      <h1 className="text-xl font-bold text-foreground">My Listings</h1>
+    <div className="flex flex-col gap-6">
+
+      {/* title + stats */}
+      <div>
+        <h1 className="text-xl font-bold text-foreground mb-4">My Listings</h1>
+        <div className="grid grid-cols-3 gap-3">
+          {[
+            { label: "Total", value: pets.length },
+            { label: "Available", value: available },
+            { label: "Adopted", value: adopted },
+          ].map((stat) => (
+            <div key={stat.label} className="bg-background border border-divider rounded-xl p-4 text-center">
+              <p className="text-2xl font-bold text-foreground">{stat.value}</p>
+              <p className="text-xs text-foreground-400 mt-0.5">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {pets.map((pet) => (
           <div
             key={pet._id}
-            className="bg-background border border-divider rounded-xl overflow-hidden shadow-sm"
+            className="bg-background border border-divider rounded-xl overflow-hidden shadow-sm flex flex-col"
           >
             <div className="relative w-full h-44">
               <Image
@@ -43,22 +69,49 @@ const MyListingClient = ({ pets, email }) => {
                 className="object-cover"
               />
             </div>
-            <div className="p-4">
-              <p className="font-bold text-foreground">{pet.petName}</p>
-              <p className="text-xs text-foreground-400 mt-0.5">
-                {pet.species} · {pet.breed}
-              </p>
-              <p className="text-xs text-foreground-400">{pet.location}</p>
-              <Button
-                size="sm"
-                radius="full"
-                variant="flat"
-                color="danger"
-                className="mt-4 w-full"
-                onClick={() => handleDelete(pet._id)}
-              >
-                Delete Listing
-              </Button>
+
+            <div className="p-4 flex flex-col gap-3 flex-1">
+              <div>
+                <p className="font-bold text-foreground">{pet.petName}</p>
+                <p className="text-xs text-foreground-400 mt-0.5">
+                  {pet.species} · {pet.breed}
+                </p>
+                <p className="text-sm font-semibold text-warning mt-1">
+                  {pet.adoptionFee === 0 || pet.adoptionFee === "0"
+                    ? "Free"
+                    : `$${pet.adoptionFee}`}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 mt-auto">
+                <Button
+                  size="sm"
+                  radius="full"
+                  variant="flat"
+                  className="text-foreground-500"
+                  onClick={() => alert("Requests coming soon")}
+                >
+                  Requests
+                </Button>
+
+               <EditPetModal id={pet._id} pet={pet}></EditPetModal>
+
+                <Link href={`/all_pets/${pet._id}`} className="w-full">
+                  <Button size="sm" radius="full" variant="bordered" className="w-full">
+                    View
+                  </Button>
+                </Link>
+
+                <Button
+                  size="sm"
+                  radius="full"
+                  variant="flat"
+                  color="danger"
+                  onClick={() => handleDelete(pet._id)}
+                >
+                  Delete
+                </Button>
+              </div>
             </div>
           </div>
         ))}

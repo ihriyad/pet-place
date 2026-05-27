@@ -6,7 +6,7 @@ import React from 'react';
 
 const MyListingPage =async () => {
     const session = await auth.api.getSession({
-    headers: await headers() // you need to pass the headers object.
+    headers: await headers() 
 })
 const email = session?.user?.email
 // console.log(email);
