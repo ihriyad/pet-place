@@ -1,3 +1,4 @@
+import { Label, Separator } from "@heroui/react";
 import Image from "next/image";
 import React from "react";
 import {
@@ -87,6 +88,13 @@ const PetDetails = ({ pet }) => {
             </p>
           </div>
         </div>
+      </div>
+      {/* owner */}
+      <div className="bg-background p-3 rounded-2xl">
+        <Label>Owner:</Label>
+        <Separator></Separator>
+        <Label>{pet.ownerName}</Label>
+        <Label>{pet.ownerEmail}</Label>
       </div>
     </div>
   );

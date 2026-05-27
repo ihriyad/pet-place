@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
-import { Input, Button, TextArea, Label } from "@heroui/react";
+import { Input, Button, TextArea, Label, Separator } from "@heroui/react";
 import { FaHeart, FaCalendarAlt } from "react-icons/fa";
 import { authClient } from "@/lib/auth-client";
 
-const AdoptionFormCard = ({ petName, petId }) => {
+const AdoptionFormCard = ({ pet }) => {
+  console.log(pet);
+  const { petName, _id, gender, age } = pet;
   const { data: session } = authClient.useSession();
 
   const currentUserName = session?.user?.name || "Loading Handler...";
@@ -41,7 +43,10 @@ const AdoptionFormCard = ({ petName, petId }) => {
       </div>
 
       <form onSubmit={handleAdoptSubmit} className="flex flex-col gap-5">
-        <Label>Target Pet</Label>
+         <Label>Pet Information:</Label>
+
+        <div className="flex flex-col gap-3 bg-white/10 p-3 rounded-2xl">
+          <Label>Target Pet</Label>
         <Input
           readOnly
           type="text"
@@ -50,7 +55,29 @@ const AdoptionFormCard = ({ petName, petId }) => {
           radius="sm"
           className="cursor-not-allowed font-bold"
         />
+        <Label>Gender</Label>
+        <Input
+          readOnly
+          type="text"
+          defaultValue={gender}
+          variant="flat"
+          radius="sm"
+          className="cursor-not-allowed font-bold"
+        />
+        <Label>Age</Label>
+        <Input
+          readOnly
+          type="text"
+          defaultValue={age}
+          variant="flat"
+          radius="sm"
+          className="cursor-not-allowed font-bold"
+        />
+        </div>
+        <Separator></Separator>
+         <Label>Your Information:</Label>
 
+       <div className="flex flex-col gap-3 bg-white/10 p-3 rounded-2xl">
         <Label>Your Full Name</Label>
         <Input
           readOnly
@@ -79,7 +106,7 @@ const AdoptionFormCard = ({ petName, petId }) => {
           variant="bordered"
           radius="sm"
         />
-
+        <Label>Why do you want to adopt?</Label>
         <TextArea
           required
           name="message"
@@ -88,6 +115,7 @@ const AdoptionFormCard = ({ petName, petId }) => {
           variant="bordered"
           radius="sm"
         />
+       </div>
 
         <Button
           type="submit"
