@@ -1,4 +1,3 @@
-
 export const addPetInfo = async (formData) => {
   const newPet = Object.fromEntries(formData.entries());
   console.log(newPet);
@@ -64,6 +63,25 @@ export const handleEditPet = async (editedPet, id) => {
       },
       body: JSON.stringify(editedPet),
     },
+  );
+  const data = await res.json();
+  return data;
+};
+
+export const sendAdoptionRequest = async (requestData) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SEVER_URL}/requests`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(requestData),
+  });
+  const data = await res.json();
+  return data;
+};
+
+// get requests for the logged in user
+export const getMyRequests = async (email) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SEVER_URL}/requests/${encodeURIComponent(email)}`,
   );
   const data = await res.json();
   return data;

@@ -1,5 +1,5 @@
 import React from "react";
-import { getPetById } from "@/lib/actions";
+import { getMyRequests, getPetById } from "@/lib/actions";
 import AdoptionFormCard from "@/components/petdetails/AdoptionFormCard";
 import PetDetails from "@/components/petdetails/PetDetails";
 import { auth } from "@/lib/auth";
@@ -18,6 +18,11 @@ const PetDetailsPage = async ({ params }) => {
   });
   const user = session?.user;
   // console.log(user);
+
+  const data = await getMyRequests(user?.email);
+  // console.log(email)
+  const adopterEmail = data[0]?.adopterEmail;
+  // console.log(adopterEmail)
 
   if (!pet) {
     return (
@@ -41,7 +46,7 @@ const PetDetailsPage = async ({ params }) => {
             {petOwnerEmail === user.email ? (
               <SameUser></SameUser>
             ) : (
-              <AdoptionFormCard pet={pet} />
+              <AdoptionFormCard adopterEmail={adopterEmail} pet={pet} />
             )}
           </div>
         </div>
