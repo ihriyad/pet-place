@@ -7,6 +7,8 @@ const PetDetailsPage = async ({ params }) => {
   const { id } = await params;
   const pet = await getPetById(id);
 
+  
+
   if (!pet) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">

@@ -7,10 +7,9 @@ import Link from "next/link";
 import React from "react";
 import { FaPaw } from "react-icons/fa";
 import EditPetModal from "./EditPetModal";
+import DeletePet from "./DeletePet";
 
 const MyListingClient = ({ pets, email }) => {
-  const router = useRouter();
-
   if (pets.length === 0)
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
@@ -24,20 +23,11 @@ const MyListingClient = ({ pets, email }) => {
       </div>
     );
 
-  const handleDelete = async (id) => {
-    const data = await deletePet(id, email);
-    if (data.deletedCount === 1) {
-      router.refresh();
-    }
-  };
-
   const available = pets.filter((p) => !p.adopted).length;
   const adopted = pets.filter((p) => p.adopted).length;
 
   return (
     <div className="flex flex-col gap-6">
-
-      {/* title + stats */}
       <div>
         <h1 className="text-xl font-bold text-foreground mb-4">My Listings</h1>
         <div className="grid grid-cols-3 gap-3">
@@ -46,7 +36,10 @@ const MyListingClient = ({ pets, email }) => {
             { label: "Available", value: available },
             { label: "Adopted", value: adopted },
           ].map((stat) => (
-            <div key={stat.label} className="bg-background border border-divider rounded-xl p-4 text-center">
+            <div
+              key={stat.label}
+              className="bg-background border border-divider rounded-xl p-4 text-center"
+            >
               <p className="text-2xl font-bold text-foreground">{stat.value}</p>
               <p className="text-xs text-foreground-400 mt-0.5">{stat.label}</p>
             </div>
@@ -94,23 +87,20 @@ const MyListingClient = ({ pets, email }) => {
                   Requests
                 </Button>
 
-               <EditPetModal id={pet._id} pet={pet}></EditPetModal>
+                <EditPetModal id={pet._id} pet={pet}></EditPetModal>
 
                 <Link href={`/all_pets/${pet._id}`} className="w-full">
-                  <Button size="sm" radius="full" variant="bordered" className="w-full">
+                  <Button
+                    size="sm"
+                    radius="full"
+                    variant="bordered"
+                    className="w-full"
+                  >
                     View
                   </Button>
                 </Link>
 
-                <Button
-                  size="sm"
-                  radius="full"
-                  variant="flat"
-                  color="danger"
-                  onClick={() => handleDelete(pet._id)}
-                >
-                  Delete
-                </Button>
+                <DeletePet pet={pet} email={email}></DeletePet>
               </div>
             </div>
           </div>

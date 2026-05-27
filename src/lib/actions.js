@@ -1,6 +1,7 @@
+
 export const addPetInfo = async (formData) => {
   const newPet = Object.fromEntries(formData.entries());
-  // console.log(newPet);
+  console.log(newPet);
   const res = await fetch(`${process.env.NEXT_PUBLIC_SEVER_URL}/all_pets`, {
     method: "POST",
     headers: {
@@ -9,6 +10,7 @@ export const addPetInfo = async (formData) => {
     body: JSON.stringify(newPet),
   });
   const data = await res.json();
+  return data;
   // console.log("data submitted", data);
 };
 
@@ -64,8 +66,5 @@ export const handleEditPet = async (editedPet, id) => {
     },
   );
   const data = await res.json();
-  if (data.modifiedCount === 1) {
-    window.location.reload();
-  }
   return data;
 };

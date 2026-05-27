@@ -2,16 +2,23 @@
 
 import { handleEditPet } from "@/lib/actions";
 import { Button, Input, Modal, TextArea } from "@heroui/react";
+import { useRouter } from "next/navigation";
 import React from "react";
+import toast from "react-hot-toast";
 import { FaPaw } from "react-icons/fa";
 
 const EditPetModal = ({ pet, id }) => {
   // console.log(id);
-
+  const router = useRouter();
   const editFormAction = async (formData) => {
     const editedPet = Object.fromEntries(formData.entries());
     //   console.log(editedPet);
-    await handleEditPet(editedPet, id);
+    const data = await handleEditPet(editedPet, id);
+    // console.log(data)
+    if (data.modifiedCount === 1) {
+      toast.success("Information Updated");
+      router.refresh();
+    }
   };
   return (
     <Modal>
@@ -193,6 +200,7 @@ const EditPetModal = ({ pet, id }) => {
                     Cancel
                   </Button>
                   <Button
+                  slot={"close"}
                     type="submit"
                     className="bg-warning/20 text-warning font-semibold"
                   >

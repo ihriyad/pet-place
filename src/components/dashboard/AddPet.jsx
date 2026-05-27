@@ -2,21 +2,26 @@
 
 import React from "react";
 import { Input, Button, TextArea } from "@heroui/react";
-import { FaPaw, FaCloudUploadAlt } from "react-icons/fa";
+import { FaPaw } from "react-icons/fa";
 import { authClient } from "@/lib/auth-client";
 import { addPetInfo } from "@/lib/actions";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const AddPet = () => {
+  const router = useRouter();
+
   const { data: session } = authClient.useSession();
-  const ownerEmail = session?.user?.email || "loading@petplace.com";
+  const ownerEmail = session?.user?.email || null;
+  const ownerName = session?.user?.name || null;
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData(e.currentTarget);
-  //   const petData = Object.fromEntries(formData.entries());
-  //   console.log("Form Data Submitted:", petData);
-  // };
-
+  const formAction = async (formData) => {
+    const data = await addPetInfo(formData);
+    if (data.insertedId) {
+      toast.success("Your Pet has been added Successfully");
+      router.push("/dashboard/my_listing");
+    }
+  };
   return (
     <div className="bg-default-50/30 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto bg-background border border-divider rounded-2xl p-6 md:p-10 shadow-sm">
@@ -34,7 +39,7 @@ const AddPet = () => {
           </div>
         </div>
 
-        <form action={addPetInfo} className="flex flex-col gap-6">
+        <form action={formAction} className="flex flex-col gap-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-foreground">
@@ -192,6 +197,18 @@ const AddPet = () => {
           <div className="pt-4 border-t border-divider">
             <div className="flex flex-col gap-1 max-w-md">
               <label className="text-sm font-medium text-foreground">
+                Owner Name
+              </label>
+              <Input
+                type="text"
+                name="ownerName"
+                readOnly
+                defaultValue={ownerName}
+                variant="flat"
+                radius="sm"
+                className="cursor-not-allowed"
+              />
+              <label className="text-sm font-medium text-foreground">
                 Owner Contact Email
               </label>
               <Input
@@ -209,14 +226,17 @@ const AddPet = () => {
             </div>
           </div>
 
-          <div className="flex justify-end mt-4">
+          <div className="flex flex-col md:flex-row gap-4 justify-end mt-4">
+            <Button type="reset" variant="secondary" className={"text-warning"}>
+              Reset
+            </Button>
             <Button
               type="submit"
               variant="secondary"
               size="lg"
               className="w-full sm:w-48 font-semibold text-warning transition-transform active:scale-[0.98]"
             >
-              Add Pet
+              Add Pet For Adoption
             </Button>
           </div>
         </form>
