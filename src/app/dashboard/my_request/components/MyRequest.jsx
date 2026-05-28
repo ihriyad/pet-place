@@ -1,4 +1,4 @@
-import CancelReqAlert from "@/app/dashboard/my_request/component/CancelReqAlert";
+import CancelReqAlert from "@/app/dashboard/my_request/components/CancelReqAlert";
 import { cancelRequest } from "@/lib/actions";
 import { Button } from "@heroui/react";
 import Image from "next/image";

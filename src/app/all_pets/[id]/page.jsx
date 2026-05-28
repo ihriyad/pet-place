@@ -1,10 +1,10 @@
 import React from "react";
 import { getMyRequests, getPetById } from "@/lib/actions";
-import AdoptionFormCard from "@/components/petdetails/AdoptionFormCard";
-import PetDetails from "@/components/petdetails/PetDetails";
+import AdoptionFormCard from "@/app/all_pets/[id]/components/AdoptionFormCard";
+import PetDetails from "@/app/all_pets/[id]/components/PetDetails";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import SameUser from "@/components/petdetails/SameUser";
+import SameUser from "@/app/all_pets/[id]/components/SameUser";
 
 const PetDetailsPage = async ({ params }) => {
   const { id } = await params;

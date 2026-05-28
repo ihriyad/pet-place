@@ -1,5 +1,5 @@
 "use client";
-import MyRequest from "@/components/dashboard/MyRequest";
+import MyRequest from "@/app/dashboard/my_request/components/MyRequest";
 import { getMyRequests } from "@/lib/actions";
 import { authClient } from "@/lib/auth-client";
 

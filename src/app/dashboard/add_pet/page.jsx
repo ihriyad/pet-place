@@ -1,4 +1,4 @@
-import AddPet from '@/components/dashboard/AddPet';
+import AddPet from '@/app/dashboard/add_pet/components/AddPet';
 import React from 'react';
 
 const AddPetPage = () => {
