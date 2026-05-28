@@ -19,10 +19,6 @@ const PetDetailsPage = async ({ params }) => {
   const user = session?.user;
   // console.log(user);
 
-  const data = await getMyRequests(user?.email);
-  // console.log(email)
-  const adopterEmail = data[0]?.adopterEmail;
-  // console.log(adopterEmail)
 
   if (!pet) {
     return (
@@ -43,10 +39,10 @@ const PetDetailsPage = async ({ params }) => {
 
           {/* form right */}
           <div className="lg:col-span-5 lg:sticky lg:top-6">
-            {petOwnerEmail === user.email ? (
+            {petOwnerEmail === user?.email ? (
               <SameUser></SameUser>
             ) : (
-              <AdoptionFormCard adopterEmail={adopterEmail} pet={pet} />
+              <AdoptionFormCard pet={pet} />
             )}
           </div>
         </div>

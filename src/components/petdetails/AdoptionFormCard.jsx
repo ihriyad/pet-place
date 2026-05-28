@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Button, TextArea, Label, Separator } from "@heroui/react";
 import { FaHeart } from "react-icons/fa";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
-import { getMyRequests, sendAdoptionRequest } from "@/lib/actions";
+import { checkRequest, sendAdoptionRequest } from "@/lib/actions";
 
 import { useRouter } from "next/navigation";
 
-const AdoptionFormCard = ({ pet, adopterEmail }) => {
+
+const AdoptionFormCard = ({ pet }) => {
   // console.log(pet);
   const { petName, gender, age } = pet;
   const { data: session } = authClient.useSession();
@@ -17,9 +18,8 @@ const AdoptionFormCard = ({ pet, adopterEmail }) => {
   const currentUserName = session?.user?.name || null;
   const currentUserEmail = session?.user?.email || null;
 
-  const [requested, setRequested] = useState(false);
-
   const router = useRouter();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -42,19 +42,25 @@ const AdoptionFormCard = ({ pet, adopterEmail }) => {
     // console.log(requestData)
 
     const data = await sendAdoptionRequest(requestData);
-    console.log(data);
+    // console.log(data);
     if (data.insertedId) {
       toast.success("Request Send to Owner Successfully");
-      setRequested(true);
+      // setRequested(true);
+
       router.refresh();
+      e.target.reset();
+      setRequestStatus("pending");
     }
   };
-  // const handleStatus =async()=>{
 
-  //   // console.log(data);
-  //   const status = data.map(d=>d)
-  //   console.log(status)
-  // }
+  const [requestStatus, setRequestStatus] = useState(null);
+
+  useEffect(() => {
+    if (!currentUserEmail || !pet._id) return;
+    checkRequest(pet._id, currentUserEmail).then((data) => {
+      if (data.exists) setRequestStatus(data.status);
+    });
+  }, [currentUserEmail]);
 
   return (
     <div className="bg-background border border-divider rounded-3xl p-6 md:p-8 shadow-sm">
@@ -142,24 +148,18 @@ const AdoptionFormCard = ({ pet, adopterEmail }) => {
             radius="sm"
           />
         </div>
-        {adopterEmail === currentUserEmail ? (
-          <Button
-            variant="secondary"
-            size="lg"
-            className="w-full mt-2 font-bold text-warning transition-transform active:scale-[0.99] shadow-lg shadow-warning/5"
-          >
-            Pending
-          </Button>
-        ) : (
-          <Button
-            type="submit"
-            variant="secondary"
-            size="lg"
-            className="w-full mt-2 font-bold text-warning transition-transform active:scale-[0.99] shadow-lg shadow-warning/5"
-          >
-            Adopt ${petName}
-          </Button>
-        )}
+        <Button
+          type={requestStatus ? "button" : "submit"}
+          disabled={!!requestStatus}
+          variant="secondary"
+          size="lg"
+          className="w-full mt-2 font-bold text-warning transition-transform active:scale-[0.99] shadow-lg shadow-warning/5"
+        >
+          {requestStatus === "pending" && "Pending"}
+          {requestStatus === "approved" && "Approved"}
+          {requestStatus === "rejected" && "Rejected"}
+          {!requestStatus && `Adopt ${petName}`}
+        </Button>
       </form>
     </div>
   );

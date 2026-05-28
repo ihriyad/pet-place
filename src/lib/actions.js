@@ -86,3 +86,11 @@ export const getMyRequests = async (email) => {
   const data = await res.json();
   return data;
 };
+
+// check if user already requested this pet
+export const checkRequest = async (petId, email) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SEVER_URL}/requests/check/${petId}/${encodeURIComponent(email)}`,
+  );
+  return res.json();
+};
