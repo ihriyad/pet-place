@@ -133,3 +133,14 @@ export const cancelRequest = async (id, email) => {
 
   return data;
 };
+
+export const searchPets = async ({ name = "", species = [] }) => {
+  const params = new URLSearchParams();
+  if (name) params.append("name", name);
+  species.forEach((s) => params.append("species", s));
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SEVER_URL}/all_pets/search?${params.toString()}`
+  );
+  return res.json();
+};

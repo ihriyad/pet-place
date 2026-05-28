@@ -1,4 +1,4 @@
-import EditProfile from "@/components/profile/EditProfile";
+import EditProfile from "@/app/profile/components/EditProfile";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import React from "react";
