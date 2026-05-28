@@ -1,3 +1,5 @@
+
+
 export const addPetInfo = async (formData) => {
   const newPet = Object.fromEntries(formData.entries());
   console.log(newPet);
@@ -19,9 +21,14 @@ export const getAllPets = async () => {
   return pets;
 };
 
-export const getPetById = async (id) => {
+export const getPetById = async (id, token) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SEVER_URL}/all_pets/${id}`,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    },
   );
   const pet = await res.json();
   return pet;
@@ -140,7 +147,7 @@ export const searchPets = async ({ name = "", species = [] }) => {
   species.forEach((s) => params.append("species", s));
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SEVER_URL}/all_pets/search?${params.toString()}`
+    `${process.env.NEXT_PUBLIC_SEVER_URL}/all_pets/search?${params.toString()}`,
   );
   return res.json();
 };

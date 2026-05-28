@@ -8,17 +8,14 @@ import SameUser from "@/app/all_pets/[id]/components/SameUser";
 
 const PetDetailsPage = async ({ params }) => {
   const { id } = await params;
-  const pet = await getPetById(id);
-  // console.log(pet)
-  const petOwnerEmail = pet.ownerEmail;
-  // console.log(petOwnerEmail);
-
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  const user = session?.user;
-  // console.log(user);
+  const user = session?.user || null;
+  const token = session?.data?.token || null;
+  const pet = await getPetById(id, token);
 
+  const petOwnerEmail = pet.ownerEmail;
 
   if (!pet) {
     return (
