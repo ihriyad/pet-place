@@ -8,6 +8,7 @@ import React from "react";
 import { FaPaw } from "react-icons/fa";
 import EditPetModal from "./EditPetModal";
 import DeletePet from "./DeletePet";
+import RequestsModal from "./RequestsModal";
 
 const MyListingClient = ({ pets, email }) => {
   if (pets.length === 0)
@@ -77,15 +78,7 @@ const MyListingClient = ({ pets, email }) => {
               </div>
 
               <div className="grid grid-cols-2 gap-2 mt-auto">
-                <Button
-                  size="sm"
-                  radius="full"
-                  variant="flat"
-                  className="text-foreground-500"
-                  onClick={() => alert("Requests coming soon")}
-                >
-                  Requests
-                </Button>
+                <RequestsModal petId={pet._id} />
 
                 <EditPetModal id={pet._id} pet={pet}></EditPetModal>
 

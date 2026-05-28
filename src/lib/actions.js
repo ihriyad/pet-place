@@ -94,3 +94,24 @@ export const checkRequest = async (petId, email) => {
   );
   return res.json();
 };
+
+// get requests for a specific pet for owner
+export const getPetRequests = async (petId) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SEVER_URL}/requests/pet/${petId}`,
+  );
+  return res.json();
+};
+
+// approve or reject a request
+export const updateRequestStatus = async (requestId, status) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SEVER_URL}/requests/${requestId}`,
+    {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ status }),
+    },
+  );
+  return res.json();
+};
