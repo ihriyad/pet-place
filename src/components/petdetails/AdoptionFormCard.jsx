@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { checkRequest, sendAdoptionRequest } from "@/lib/actions";
 
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 const AdoptionFormCard = ({ pet }) => {
@@ -160,6 +161,7 @@ const AdoptionFormCard = ({ pet }) => {
           {requestStatus === "rejected" && "Rejected"}
           {!requestStatus && `Adopt ${petName}`}
         </Button>
+        {requestStatus && <Link className="text-center" href={"/dashboard/my_request"}>Manage Requests in <span className="text-warning underline">My Request</span></Link>}
       </form>
     </div>
   );

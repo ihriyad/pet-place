@@ -36,7 +36,7 @@ export const getMyListings = async (email) => {
 };
 
 export const deletePet = async (id, email) => {
-  console.log(id, email, "from delete handle");
+  // console.log(id, email, "from delete handle");
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SEVER_URL}/all_pets/${id}?email=${email}`,
     {
@@ -114,4 +114,22 @@ export const updateRequestStatus = async (requestId, status) => {
     },
   );
   return res.json();
+};
+
+//cancel pet adopt req
+export const cancelRequest = async (id, email) => {
+  console.log(id, email, "from delete handle");
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SEVER_URL}/requests/${id}?email=${email}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+    },
+  );
+  const data = await res.json();
+  // console.log(data);
+
+  return data;
 };
