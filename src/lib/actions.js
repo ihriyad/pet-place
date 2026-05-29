@@ -1,5 +1,3 @@
-
-
 export const addPetInfo = async (formData) => {
   const newPet = Object.fromEntries(formData.entries());
   console.log(newPet);
@@ -26,7 +24,7 @@ export const getPetById = async (id, token) => {
     `${process.env.NEXT_PUBLIC_SEVER_URL}/all_pets/${id}`,
     {
       headers: {
-        authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}` || "",
       },
     },
   );

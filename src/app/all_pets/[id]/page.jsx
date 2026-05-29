@@ -12,7 +12,13 @@ const PetDetailsPage = async ({ params }) => {
     headers: await headers(),
   });
   const user = session?.user || null;
-  const token = session?.data?.token || null;
+
+  // console.log(user);
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  // console.log(token);
+
   const pet = await getPetById(id, token);
 
   const petOwnerEmail = pet.ownerEmail;
