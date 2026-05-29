@@ -4,20 +4,30 @@ import { authClient } from "@/lib/auth-client";
 import { Avatar, Button, Dropdown, Label } from "@heroui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { IoIosArrowDropdown, IoIosArrowDropdownCircle } from "react-icons/io";
+import { TbLogout } from "react-icons/tb";
+const ProfileDropdown = ({ user }) => {
+  const [isLoading, setIsLoading] = useState(false);
 
-export function ProfileDropdown({ user }) {
   const router = useRouter();
 
   const handleSignOut = async () => {
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          router.push("/login");
+    try {
+      setIsLoading(true);
+
+      await authClient.signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            router.push("/login");
+          },
         },
-      },
-    });
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   return (
     <Dropdown>
       <Button
@@ -30,7 +40,6 @@ export function ProfileDropdown({ user }) {
           <Avatar.Fallback>{user?.name?.[0]}</Avatar.Fallback>
         </Avatar>
         <IoIosArrowDropdownCircle />
-
       </Button>
       <Dropdown.Popover>
         <Dropdown.Menu
@@ -47,10 +56,19 @@ export function ProfileDropdown({ user }) {
             <Label>Dashboard</Label>
           </Dropdown.Item>
           <Dropdown.Item id="logout" textValue="Log Out" variant="danger">
-            <Label>Log Out</Label>
+            <Label className="flex items-center gap-2">
+              {isLoading ? (
+                "Logging out..."
+              ) : (
+                <>
+                  Log Out <TbLogout />
+                </>
+              )}
+            </Label>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown.Popover>
     </Dropdown>
   );
-}
+};
+export default ProfileDropdown;

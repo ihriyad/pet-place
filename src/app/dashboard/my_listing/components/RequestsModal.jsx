@@ -52,17 +52,17 @@ const RequestsModal = ({ petId }) => {
                 </p>
               )}
 
-              <div className="flex flex-col gap-3">
+              <div className="bg-background rounded-2xl flex flex-col gap-3">
                 {requests.map((req) => (
                   <div
                     key={req._id}
-                    className="border border-divider rounded-xl p-4 flex flex-col gap-3"
+                    className="  p-4 flex flex-col gap-3"
                   >
                     {/* adopter info */}
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="font-semibold text-foreground text-sm">
-                          {req.adopterName}
+                         Requested by {req.adopterName}
                         </p>
                         <p className="text-xs text-foreground-400">
                           {req.adopterEmail}
@@ -83,19 +83,21 @@ const RequestsModal = ({ petId }) => {
                     </div>
 
                     {/* message */}
-                    <p className="text-xs text-foreground-500 bg-default-50 rounded-lg p-3">
+                    <p className="font-bold">
+
+                      Message:
+                    </p>
+                    <p className="text-xs text-warning bg-default-50 rounded-lg p-3">
                       {req.message}
                     </p>
 
-                    {/* approve / reject — only show if still pending */}
                     {req.status === "pending" && (
                       <div className="flex gap-2">
                         <Button
                           size="sm"
+                          variant="ghost"
                           radius="full"
-                          color="success"
-                          variant="flat"
-                          className="flex-1"
+                          className={"text-success  "}
                           onClick={() => handleStatus(req._id, "approved")}
                         >
                           Approve
@@ -103,9 +105,8 @@ const RequestsModal = ({ petId }) => {
                         <Button
                           size="sm"
                           radius="full"
-                          color="danger"
-                          variant="flat"
-                          className="flex-1"
+                          variant="ghost"
+                          className={"text-danger "}
                           onClick={() => handleStatus(req._id, "rejected")}
                         >
                           Reject

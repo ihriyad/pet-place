@@ -8,9 +8,10 @@ import { RiMenu2Line, RiCloseLine } from "react-icons/ri";
 import { FaPaw } from "react-icons/fa";
 import ThemeSwitcher from "../theme/ThemeSwitcher";
 import { authClient } from "@/lib/auth-client";
-import { ProfileDropdown } from "../../app/profile/components/ProfileDropdown";
+
 import { Lobster } from "next/font/google";
 import Image from "next/image";
+import ProfileDropdown from "./ProfileDropdown";
 
 const links = [
   { label: "Home", href: "/" },

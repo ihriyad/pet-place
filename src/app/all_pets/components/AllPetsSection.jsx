@@ -15,11 +15,9 @@ const AllPetsSection = ({ pets: initialPets }) => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const initialPetsRef = useRef(initialPets);
-
   useEffect(() => {
     if (!name && selectedSpecies.length === 0) {
-      setPets(initialPetsRef.current);
+      setPets(initialPets);
       return;
     }
 

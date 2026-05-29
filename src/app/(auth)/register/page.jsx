@@ -10,6 +10,7 @@ import {
   FieldError,
   Description,
   Separator,
+  Spinner,
 } from "@heroui/react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { authClient } from "@/lib/auth-client";
@@ -197,11 +198,17 @@ const RegisterPage = () => {
             type="submit"
             radius="full"
             size="sm"
-            isLoading={isLoading}
-            disabled={isLoading}
+            // isLoading={isLoading}
+            // disabled={isLoading}
             className="w-full text-warning font-semibold text-base h-12 transition-transform active:scale-[0.98] mt-2"
           >
-            Sign Up
+            {isLoading ? (
+                          <>
+                            Creating your account ... <Spinner color="warning" />
+                          </>
+                        ) : (
+                          <>Register</>
+                        )}
           </Button>
         </form>
 

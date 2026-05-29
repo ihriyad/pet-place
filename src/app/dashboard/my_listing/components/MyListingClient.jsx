@@ -21,6 +21,8 @@ const MyListingClient = ({ pets, email }) => {
         <p className="text-sm text-foreground-400">
           Pets you list for adoption will show up here.
         </p>
+
+        <Link href={'/dashboard/add_pet'} className="text-warning ">Add pet</Link>
       </div>
     );
 
