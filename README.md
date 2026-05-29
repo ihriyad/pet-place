@@ -1,36 +1,194 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PetPlace
 
-## Getting Started
+> A modern full-stack pet adoption platform where users can list, discover, and adopt pets — built with Next.js, MongoDB, and HeroUI.
 
-First, run the development server:
+---
+
+## 🌐 Live URL
+
+🔗 [https://pet-place.vercel.app](https://pet-place.vercel.app)
+
+---
+
+## 💡 Purpose
+
+PetPlace connects pet owners who want to re home their pets with loving families looking to adopt. Users can create an account, list pets for adoption with full details, browse available pets, and send adoption requests — all in one clean, modern interface.
+
+---
+
+## ✨ Features
+
+- 🔐 **Authentication** — Secure email/password sign up and login powered by Better Auth
+- 🐶 **List a Pet** — Owners can add pets with details like species, breed, age, gender, health status, vaccination status, and photos
+- 🔍 **Search & Filter** — Browse all pets with real-time search by name and filter by species
+- 📋 **Adoption Requests** — Users can send adoption requests; owners can view, approve, or reject them from their dashboard
+- 👤 **User Profile** — Edit display name and profile photo; session-synced owner info on listings
+- 🌙 **Dark / Light Mode** — Full theme support with a theme switcher
+- 📱 **Fully Responsive** — Optimized for mobile, tablet, and desktop
+- 📄 **Pagination** — Clean paginated pet browsing with page controls
+- 🗂️ **My Listings** — Dashboard to manage your own pet listings with edit and delete options
+- 📬 **My Requests** — Track all adoption requests you've submitted with cancel option
+
+---
+
+## 🗂️ Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pet-place
+├── AGENTS.md
+├── CLAUDE.md
+├── eslint.config.mjs
+├── jsconfig.json
+├── next.config.mjs
+├── package.json
+├── postcss.config.mjs
+└── src
+    ├── app
+    │   ├── (auth)
+    │   │   ├── layout.jsx
+    │   │   ├── login
+    │   │   │   └── page.jsx
+    │   │   └── register
+    │   │       └── page.jsx
+    │   ├── (main)
+    │   │   ├── layout.jsx
+    │   │   └── page.jsx
+    │   ├── all_pets
+    │   │   ├── [id]
+    │   │   │   ├── components
+    │   │   │   │   ├── AdoptionFormCard.jsx
+    │   │   │   │   ├── PetDetails.jsx
+    │   │   │   │   └── SameUser.jsx
+    │   │   │   ├── loading.jsx
+    │   │   │   └── page.jsx
+    │   │   ├── components
+    │   │   │   ├── AllPetsSection.jsx
+    │   │   │   ├── PetCard.jsx
+    │   │   │   └── PetFilters.jsx
+    │   │   ├── layout.jsx
+    │   │   ├── loading.jsx
+    │   │   └── page.jsx
+    │   ├── api
+    │   │   └── auth
+    │   │       └── [...all]
+    │   │           └── route.js
+    │   ├── dashboard
+    │   │   ├── add_pet
+    │   │   │   ├── components
+    │   │   │   │   └── AddPet.jsx
+    │   │   │   └── page.jsx
+    │   │   ├── layout.jsx
+    │   │   ├── my_listing
+    │   │   │   ├── components
+    │   │   │   │   ├── DeletePet.jsx
+    │   │   │   │   ├── EditPetModal.jsx
+    │   │   │   │   ├── MyListingClient.jsx
+    │   │   │   │   └── RequestsModal.jsx
+    │   │   │   ├── loading.jsx
+    │   │   │   └── page.jsx
+    │   │   ├── my_request
+    │   │   │   ├── components
+    │   │   │   │   ├── CancelReqAlert.jsx
+    │   │   │   │   └── MyRequest.jsx
+    │   │   │   ├── loading.jsx
+    │   │   │   └── page.jsx
+    │   │   └── page.jsx
+    │   ├── favicon.ico
+    │   ├── globals.css
+    │   ├── layout.js
+    │   ├── not-found.jsx
+    │   └── profile
+    │       ├── components
+    │       │   ├── EditProfile.jsx
+    │       │   └── ProfileDropdown.jsx
+    │       ├── layout.jsx
+    │       ├── loading.jsx
+    │       └── page.jsx
+    ├── components
+    │   ├── featured
+    │   │   ├── FeaturedPets.jsx
+    │   │   └── SliderWrapper.jsx
+    │   ├── footer
+    │   │   └── Footer.jsx
+    │   ├── hero
+    │   │   └── Hero.jsx
+    │   ├── nav
+    │   │   └── Navbar.jsx
+    │   ├── statics
+    │   │   ├── EndCTA.jsx
+    │   │   ├── FAQ.jsx
+    │   │   ├── PetCareTips.jsx
+    │   │   ├── SuccessStories.jsx
+    │   │   └── WhyAdopt.jsx
+    │   └── theme
+    │       ├── Providers.jsx
+    │       └── ThemeSwitcher.jsx
+    ├── lib
+    │   ├── actions.js
+    │   ├── auth-client.js
+    │   └── auth.js
+    └── proxy.js
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 📦 NPM Packages Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Package               | Purpose                                                                      |
+| --------------------- | ---------------------------------------------------------------------------- |
+| `next`                | React framework with App Router, SSR, and file-based routing                 |
+| `react` / `react-dom` | Core UI library                                                              |
+| `@heroui/react`       | Modern UI component library (Input, Button, Select, Pagination, Modal, etc.) |
+| `better-auth`         | Authentication library with email/password support                           |
+| `mongodb`             | Official MongoDB driver for database operations                              |
+| `react-hot-toast`     | Toast notifications for success and error feedback                           |
+| `react-icons`         | Icon library (FaPaw, FaMars, FaVenus, etc.)                                  |
+| `next/font`           | Optimized Google Fonts loading (Baloo 2, Righteous)                          |
+| `tailwindcss`         | Utility-first CSS framework for styling                                      |
+| `framer-motion`       | Animation library for smooth UI transitions                                  |
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🚀 Getting Started
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Clone the repo
+git clone https://github.com/ihriyad/pet-place.git
+cd pet-place
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Install dependencies
+npm install
 
-## Deploy on Vercel
+# Set up environment variables
+cp .env.example .env.local
+# Fill in your MongoDB URI and auth secrets
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Run development server
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 🔑 Environment Variables
+
+```env
+BETTER_AUTH_URL=http://localhost:3000
+AUTH_DB_URI=mongodb+srv://<user>:<password>@cluster0.xxxxx.mongodb.net/
+BETTER_AUTH_SECRET=your_secret_key
+```
+
+---
+
+## 🛠️ Built With
+
+- [Next.js 15](https://nextjs.org/)
+- [HeroUI](https://heroui.com/)
+- [MongoDB Atlas](https://www.mongodb.com/atlas)
+- [Better Auth](https://better-auth.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+---
+
+<p align="center">Made with 🐾 by I H Riyad</p>
