@@ -9,6 +9,8 @@ import { FaPaw } from "react-icons/fa";
 import ThemeSwitcher from "../theme/ThemeSwitcher";
 import { authClient } from "@/lib/auth-client";
 import { ProfileDropdown } from "../../app/profile/components/ProfileDropdown";
+import { Lobster } from "next/font/google";
+import Image from "next/image";
 
 const links = [
   { label: "Home", href: "/" },
@@ -16,6 +18,11 @@ const links = [
   { label: "My Requests", href: "/dashboard/my_request", isPrivate: true },
   { label: "Add Pet", href: "/dashboard/add_pet", isPrivate: true },
 ];
+const logoFont = Lobster({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-lobster",
+});
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,7 +40,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 w-full border-b border-divider backdrop-blur-md">
       <nav className="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center relative">
         {/* mobile menu */}
-        <div className="flex md:hidden">
+        <div className="flex md:hidden items-center gap-1">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="cursor-pointer text-2xl p-1 rounded-md hover:bg-default-100 transition-colors"
@@ -41,18 +48,37 @@ const Navbar = () => {
           >
             {isMenuOpen ? <RiCloseLine /> : <RiMenu2Line />}
           </button>
+          <Link href={"/"}>
+          <div className="flex items-center  p-2 rounded-2xl">
+            <Image
+              src={"/logo2.png"}
+              height={30}
+              width={30}
+              alt="Logo"
+              className="text-warning"
+            ></Image>
+            <p className={`${logoFont.className} uppercase text-lg font-bold`}>
+              pet<span className="text-warning">place</span>
+            </p>
+          </div>
+        </Link>
         </div>
 
-        {/*logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-bold tracking-wider text-xl uppercase w-fit"
-        >
-          <FaPaw className="text-warning text-2xl" />
-          <h2>
-            Pet
-            <span className="text-warning uppercase">Place</span>
-          </h2>
+        {/*logo for desktop */}
+          <Link href={"/"}
+          className="hidden md:flex">
+          <div className="flex items-center  p-2 rounded-2xl">
+            <Image
+              src={"/logo2.png"}
+              height={30}
+              width={30}
+              alt="Logo"
+              className="text-warning"
+            ></Image>
+            <p className={`${logoFont.className} uppercase text-lg font-bold`}>
+              pet<span className="text-warning">place</span>
+            </p>
+          </div>
         </Link>
 
         <ul className="hidden md:flex items-center gap-6">

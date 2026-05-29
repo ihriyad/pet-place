@@ -10,6 +10,8 @@ import {
   FaFacebook,
 } from "react-icons/fa";
 import { HiMail, HiPhone, HiLocationMarker } from "react-icons/hi";
+import Image from "next/image";
+import { Lobster } from "next/font/google";
 
 const socialLinks = [
   { icon: <FaGithub />, href: "https://github.com", label: "GitHub" },
@@ -41,7 +43,11 @@ const contactInfo = [
     text: "Pabna, Bangladesh",
   },
 ];
-
+const logoFont = Lobster({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-lobster",
+});
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -50,16 +56,20 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12">
           <div className="flex flex-col gap-4">
-            <Link
-              href="/"
-              className="flex items-center gap-2 font-bold tracking-wider text-xl uppercase w-fit"
-            >
-              <FaPaw className="text-warning text-2xl" />
-              <h2>
-                Pet
-                <span className="text-warning uppercase">Place</span>
-              </h2>
-            </Link>
+           <Link href={"/"}>
+          <div className="flex items-center  p-2 rounded-2xl">
+            <Image
+              src={"/logo2.png"}
+              height={30}
+              width={30}
+              alt="Logo"
+              className="text-warning"
+            ></Image>
+            <p className={`${logoFont.className} uppercase text-lg font-bold`}>
+              pet<span className="text-warning">place</span>
+            </p>
+          </div>
+        </Link>
             <p className="text-sm text-foreground-500 max-w-sm leading-relaxed">
               Connecting lovable pets with their forever families. Our secure
               full-stack adoption platform streamlines the request tracking and

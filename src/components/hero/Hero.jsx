@@ -6,6 +6,7 @@ import { Button } from "@heroui/react";
 import { motion } from "framer-motion";
 import { FaPaw } from "react-icons/fa";
 import Image from "next/image";
+import { Baloo_2 } from "next/font/google";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -15,10 +16,15 @@ const fadeUp = {
     transition: { delay: i * 0.15, type: "spring", stiffness: 90 },
   }),
 };
+const heroFont = Baloo_2({
+  weight: "400", 
+  subsets: ["latin"],
+  variable: "--font-heroFont",
+});
 
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-background py-12 md:py-20 lg:py-24">
+    <section className={`${heroFont.className} relative overflow-hidden bg-background py-12 md:py-20 lg:py-24 `}>
       <div className="absolute top-[-10%] right-[-10%] w-75 h-75 md:w-125 md:h-125 rounded-full bg-warning/10 blur-[80px] -z-10 pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-10%] w-62 h-62 md:w-100 md:h-100 rounded-full bg-default-200/20 blur-[60px] -z-10 pointer-events-none" />
 
@@ -66,21 +72,21 @@ const Hero = () => {
             animate="visible"
             className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
           >
-            <Link href="/all_pets">
+            <Link href="/all_pets"
+            className="w-full md:w-1/2">
               <Button
-                radius="full"
                 size="lg"
-                className="bg-warning/20 font-semibold text-warning"
+                className="rounded-md w-full bg-warning/20 font-semibold text-warning"
               >
                 Browse Pets
               </Button>
             </Link>
             <Link href="/dashboard/my_listing">
+            
               <Button
                 variant="outline"
-                radius="full"
                 size="lg"
-                className="text-warning"
+                className="rounded-md w-ful text-warning"
               >
                 List a Pet
               </Button>

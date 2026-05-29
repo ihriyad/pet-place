@@ -4,10 +4,17 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaTh, FaPaw, FaUser, FaBars, FaTimes } from "react-icons/fa";
-import { BiInfoCircle } from "react-icons/bi";
+import { MdSpaceDashboard } from "react-icons/md";
+import Image from "next/image";
+import { Lobster } from "next/font/google";
+const logoFont = Lobster({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-lobster",
+});
 
 const links = [
-  { href: "/dashboard", label: "Basic", icon: <BiInfoCircle /> },
+  { href: "/dashboard", label: "Dashboard", icon: <MdSpaceDashboard /> },
   { href: "/dashboard/my_request", label: "My Request", icon: <FaPaw /> },
   { href: "/dashboard/add_pet", label: "Add Pet", icon: <FaTh /> },
   { href: "/dashboard/my_listing", label: "My Listing", icon: <FaUser /> },
@@ -32,14 +39,20 @@ const DashboardLayout = ({ children }) => {
         className={`fixed top-0 left-0 h-screen w-64 bg-background border-r border-divider z-30 flex flex-col transition-transform duration-300
           ${open ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 lg:static lg:z-auto`}
       >
-        <div className="px-6 py-5 border-b border-divider">
-          <Link
-            href={"/"}
-            className="text-lg font-bold text-foreground uppercase"
-          >
-            <FaPaw></FaPaw> Pet<span className="text-warning">Place</span>
-          </Link>
-        </div>
+        <Link href={"/"}>
+          <div className="flex items-center  p-2 rounded-2xl">
+            <Image
+              src={"/logo2.png"}
+              height={30}
+              width={30}
+              alt="Logo"
+              className="text-warning"
+            ></Image>
+            <p className={`${logoFont.className} uppercase text-lg font-bold`}>
+              pet<span className="text-warning">place</span>
+            </p>
+          </div>
+        </Link>
 
         <nav className="flex flex-col gap-1 p-4 flex-1">
           {links.map((link) => (

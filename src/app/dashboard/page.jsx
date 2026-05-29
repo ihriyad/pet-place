@@ -1,11 +1,23 @@
+import Image from "next/image";
 import Link from "next/link";
-import { FaPaw } from "react-icons/fa";
+
+import { logoFont } from "../layout";
+import { Button } from "@heroui/react";
 
 const DashBoardPage = () => {
   return (
     <div className="flex flex-col items-center justify-center h-full py-20 text-center">
-      <div className="w-12 h-12 bg-warning/10 rounded-full flex items-center justify-center text-warning text-xl mx-auto mb-5">
-        <FaPaw />
+      <div className="flex items-center  p-2 rounded-2xl">
+        <Image
+          src={"/logo2.png"}
+          height={30}
+          width={30}
+          alt="Logo"
+          className="text-warning"
+        ></Image>
+        <p className={`${logoFont.className} uppercase text-lg font-bold`}>
+          pet<span className="text-warning">place</span>
+        </p>
       </div>
 
       <h1 className="text-2xl font-bold text-foreground mb-2">
@@ -15,11 +27,21 @@ const DashBoardPage = () => {
         Manage your Request, Add pets, and Your Listing — all in one place.
       </p>
 
-      <Link
-        href="/"
-        className="px-6 py-2.5 rounded-full bg-warning/20 text-warning text-sm font-semibold hover:bg-warning/30 transition-colors"
-      >
-        Back to Home
+      <Link href="/" className="w-1/2 mx-auto">
+        <Button
+          className="w-full mb-2 text-warning rounded-md"
+          variant="outline"
+        >
+          Back to Home
+        </Button>
+      </Link>
+      <Link href="/all_pets" className="w-1/2 mx-auto">
+        <Button
+          className="w-full mb-2 text-warning rounded-md"
+          variant="outline"
+        >
+          All pets
+        </Button>
       </Link>
     </div>
   );

@@ -16,7 +16,13 @@ import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
-
+import { Lobster } from "next/font/google";
+import Image from "next/image";
+const logoFont = Lobster({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-lobster",
+});
 const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -63,6 +69,18 @@ const RegisterPage = () => {
   return (
     <div className="flex items-center justify-center py-2 bg-default-50/50">
       <div className="w-full max-w-[540px] bg-background rounded-sm p-8 md:p-12">
+        <div className="flex items-center  p-2 rounded-2xl">
+                        <Image
+                          src={"/logo2.png"}
+                          height={30}
+                          width={30}
+                          alt="Logo"
+                          className="text-warning"
+                        ></Image>
+                        <p className={`${logoFont.className} uppercase text-lg font-bold`}>
+                          pet<span className="text-warning">place</span>
+                        </p>
+                      </div>
         <div className="text-left mb-8">
           <h1 className="text-4xl font-bold tracking-tight text-foreground mb-2">
             Create Account

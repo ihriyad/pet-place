@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { Input, Button, TextArea } from "@heroui/react";
+import { Input, Button, TextArea, Select, Label, ListBox } from "@heroui/react";
+
 import { FaPaw } from "react-icons/fa";
 import { authClient } from "@/lib/auth-client";
 import { addPetInfo } from "@/lib/actions";
@@ -12,39 +13,49 @@ const AddPet = () => {
   const router = useRouter();
 
   const { data: session } = authClient.useSession();
+
   const ownerEmail = session?.user?.email || null;
   const ownerName = session?.user?.name || null;
 
   const formAction = async (formData) => {
     const data = await addPetInfo(formData);
+
     if (data.insertedId) {
       toast.success("Your Pet has been added Successfully");
       router.push("/dashboard/my_listing");
     }
   };
+
   return (
-    <div className="bg-default-50/30 px-4 sm:px-6 lg:px-8">
+    <div className="bg-default-50/30 px-4 sm:px-6 lg:px-8 py-8">
       <div className="max-w-3xl mx-auto bg-background border border-divider rounded-2xl p-6 md:p-10 shadow-sm">
+        {/* Header */}
         <div className="flex items-center gap-3 border-b border-divider pb-6 mb-8">
           <div className="w-10 h-10 rounded-xl bg-warning/10 text-warning flex items-center justify-center text-xl">
             <FaPaw />
           </div>
+
           <div>
             <h1 className="text-2xl font-bold text-foreground">
               List a Pet for Adoption
             </h1>
+
             <p className="text-sm text-foreground-500">
               Provide accurate details to find them the perfect loving family.
             </p>
           </div>
         </div>
 
+        {/* Form */}
         <form action={formAction} className="flex flex-col gap-6">
+          {/* Pet Name + Species */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Pet Name */}
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-foreground">
                 Pet Name <span className="text-danger">*</span>
               </label>
+
               <Input
                 required
                 type="text"
@@ -54,26 +65,61 @@ const AddPet = () => {
                 radius="sm"
               />
             </div>
-            <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium text-foreground">
+
+            {/* Species */}
+            <Select
+              name="species"
+              placeholder="Select species"
+              className="w-full"
+            >
+              <Label>
                 Species <span className="text-danger">*</span>
-              </label>
-              <Input
-                required
-                type="text"
-                name="species"
-                placeholder="e.g., Dog, Cat, Bird"
-                variant="bordered"
-                radius="sm"
-              />
-            </div>
+              </Label>
+
+              <Select.Trigger>
+                <Select.Value />
+                <Select.Indicator />
+              </Select.Trigger>
+
+              <Select.Popover>
+                <ListBox>
+                  <ListBox.Item id="dog" textValue="Dog">
+                    Dog
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+
+                  <ListBox.Item id="cat" textValue="Cat">
+                    Cat
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+
+                  <ListBox.Item id="bird" textValue="Bird">
+                    Bird
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+
+                  <ListBox.Item id="rabbit" textValue="Rabbit">
+                    Rabbit
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+
+                  <ListBox.Item id="fish" textValue="Fish">
+                    Fish
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+                </ListBox>
+              </Select.Popover>
+            </Select>
           </div>
 
+          {/* Breed + Age + Gender */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Breed */}
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-foreground">
                 Breed <span className="text-danger">*</span>
               </label>
+
               <Input
                 required
                 type="text"
@@ -83,10 +129,13 @@ const AddPet = () => {
                 radius="sm"
               />
             </div>
+
+            {/* Age */}
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-foreground">
                 Age <span className="text-danger">*</span>
               </label>
+
               <Input
                 required
                 type="text"
@@ -96,26 +145,46 @@ const AddPet = () => {
                 radius="sm"
               />
             </div>
-            <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium text-foreground">
+
+            {/* Gender */}
+            <Select
+              name="gender"
+              placeholder="Select gender"
+              className="w-full"
+            >
+              <Label>
                 Gender <span className="text-danger">*</span>
-              </label>
-              <Input
-                required
-                type="text"
-                name="gender"
-                placeholder="e.g., Male, Female"
-                variant="bordered"
-                radius="sm"
-              />
-            </div>
+              </Label>
+
+              <Select.Trigger>
+                <Select.Value />
+                <Select.Indicator />
+              </Select.Trigger>
+
+              <Select.Popover>
+                <ListBox>
+                  <ListBox.Item id="male" textValue="Male">
+                    Male
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+
+                  <ListBox.Item id="female" textValue="Female">
+                    Female
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+                </ListBox>
+              </Select.Popover>
+            </Select>
           </div>
 
+          {/* Image URL + Fee */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Image URL */}
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-foreground">
                 Image URL <span className="text-danger">*</span>
               </label>
+
               <Input
                 required
                 type="url"
@@ -125,10 +194,13 @@ const AddPet = () => {
                 radius="sm"
               />
             </div>
+
+            {/* Adoption Fee */}
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-foreground">
                 Adoption Fee <span className="text-danger">*</span>
               </label>
+
               <Input
                 required
                 type="number"
@@ -140,11 +212,14 @@ const AddPet = () => {
             </div>
           </div>
 
+          {/* Location + Health + Vaccination */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Location */}
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-foreground">
                 Location <span className="text-danger">*</span>
               </label>
+
               <Input
                 required
                 type="text"
@@ -154,87 +229,161 @@ const AddPet = () => {
                 radius="sm"
               />
             </div>
-            <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium text-foreground">
-                Health Status
-              </label>
-              <Input
-                required
-                type="text"
-                name="healthStatus"
-                placeholder="e.g., Healthy"
-                variant="bordered"
-                radius="sm"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium text-foreground">
-                Vaccination Status
-              </label>
-              <Input
-                required
-                type="text"
-                name="vaccinationStatus"
-                placeholder="e.g., Fully Vaccinated"
-                variant="bordered"
-                radius="sm"
-              />
-            </div>
+
+            {/* Health Status */}
+            <Select
+              name="healthStatus"
+              placeholder="Select health status"
+              className="w-full"
+            >
+              <Label>Health Status</Label>
+
+              <Select.Trigger>
+                <Select.Value />
+                <Select.Indicator />
+              </Select.Trigger>
+
+              <Select.Popover>
+                <ListBox>
+                  <ListBox.Item id="healthy" textValue="Healthy">
+                    Healthy
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+
+                  <ListBox.Item id="injured" textValue="Injured">
+                    Injured
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+
+                  <ListBox.Item
+                    id="under-treatment"
+                    textValue="Under Treatment"
+                  >
+                    Under Treatment
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+
+                  <ListBox.Item id="special-needs" textValue="Special Needs">
+                    Special Needs
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+                </ListBox>
+              </Select.Popover>
+            </Select>
+
+            {/* Vaccination Status */}
+            <Select
+              name="vaccinationStatus"
+              placeholder="Vaccination status"
+              className="w-full"
+            >
+              <Label>Vaccination Status</Label>
+
+              <Select.Trigger>
+                <Select.Value />
+                <Select.Indicator />
+              </Select.Trigger>
+
+              <Select.Popover>
+                <ListBox>
+                  <ListBox.Item
+                    id="fully-vaccinated"
+                    textValue="Fully Vaccinated"
+                  >
+                    Fully Vaccinated
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+
+                  <ListBox.Item
+                    id="partially-vaccinated"
+                    textValue="Partially Vaccinated"
+                  >
+                    Partially Vaccinated
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+
+                  <ListBox.Item id="not-vaccinated" textValue="Not Vaccinated">
+                    Not Vaccinated
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+                </ListBox>
+              </Select.Popover>
+            </Select>
           </div>
 
+          {/* Description */}
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-foreground">
               Description <span className="text-danger">*</span>
             </label>
+
             <TextArea
               name="description"
               placeholder="Tell potential adopters about your pet's habits and unique personality..."
               variant="bordered"
               radius="sm"
+              minRows={5}
             />
           </div>
 
+          {/* Owner Info */}
           <div className="pt-4 border-t border-divider">
-            <div className="flex flex-col gap-1 max-w-md">
-              <label className="text-sm font-medium text-foreground">
-                Owner Name
-              </label>
-              <Input
-                type="text"
-                name="ownerName"
-                readOnly
-                defaultValue={ownerName}
-                variant="flat"
-                radius="sm"
-                className="cursor-not-allowed"
-              />
-              <label className="text-sm font-medium text-foreground">
-                Owner Contact Email
-              </label>
-              <Input
-                type="email"
-                name="ownerEmail"
-                readOnly
-                defaultValue={ownerEmail}
-                variant="flat"
-                radius="sm"
-                className="cursor-not-allowed"
-              />
+            <div className="flex flex-col gap-3 max-w-md">
+              {/* Owner Name */}
+              <div className="flex flex-col gap-1">
+                <label className="text-sm font-medium text-foreground">
+                  Owner Name
+                </label>
+
+                <Input
+                  type="text"
+                  name="ownerName"
+                  readOnly
+                  defaultValue={ownerName}
+                  variant="flat"
+                  radius="sm"
+                  className="cursor-not-allowed"
+                />
+              </div>
+
+              {/* Owner Email */}
+              <div className="flex flex-col gap-1">
+                <label className="text-sm font-medium text-foreground">
+                  Owner Contact Email
+                </label>
+
+                <Input
+                  type="email"
+                  name="ownerEmail"
+                  readOnly
+                  defaultValue={ownerEmail}
+                  variant="flat"
+                  radius="sm"
+                  className="cursor-not-allowed"
+                />
+              </div>
+
               <p className="text-xs text-foreground-400 px-1">
                 This field is securely synced to your active account session.
               </p>
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-4 justify-end mt-4">
-            <Button type="reset" variant="secondary" className={"text-warning"}>
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-end mt-4">
+            <Button
+              type="reset"
+              variant="bordered"
+              className="text-warning border-warning"
+            >
               Reset
             </Button>
+
             <Button
               type="submit"
-              variant="secondary"
+              color="warning"
               size="lg"
-              className="w-full sm:w-48 font-semibold text-warning transition-transform active:scale-[0.98]"
+              className="w-full sm:w-52 font-semibold transition-transform active:scale-[0.98]"
             >
               Add Pet For Adoption
             </Button>
