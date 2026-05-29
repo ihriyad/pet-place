@@ -1,15 +1,11 @@
 import AllPetsSection from "@/app/all_pets/components/AllPetsSection";
 import { getAllPets } from "@/lib/actions";
-import React, { Suspense } from "react";
+import React from "react";
 
 const AllPetsPage = async () => {
   const pets = await getAllPets();
   console.log(pets, "all pets data");
-  return (
-    <Suspense fallback={<>Loading pets...</>}>
-      <AllPetsSection pets={pets}></AllPetsSection>
-    </Suspense>
-  );
+  return <AllPetsSection pets={pets}></AllPetsSection>;
 };
 
 export default AllPetsPage;
