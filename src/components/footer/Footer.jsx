@@ -8,16 +8,17 @@ import {
   FaLinkedin,
   FaTwitter,
   FaFacebook,
+  FaInstagram,
 } from "react-icons/fa";
 import { HiMail, HiPhone, HiLocationMarker } from "react-icons/hi";
 import Image from "next/image";
 import { Lobster } from "next/font/google";
 
 const socialLinks = [
-  { icon: <FaGithub />, href: "https://github.com", label: "GitHub" },
-  { icon: <FaLinkedin />, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: <FaTwitter />, href: "https://twitter.com", label: "Twitter" },
-  { icon: <FaFacebook />, href: "https://facebook.com", label: "Facebook" },
+  { icon: <FaGithub />, href: "https://github.com/ihriyad", label: "GitHub" },
+  { icon: <FaLinkedin />, href: "https://www.linkedin.com/in/ihriyad/", label: "LinkedIn" },
+  { icon: <FaInstagram />, href: "https://instagram.com/ihriyad007", label: "Instagram" },
+  { icon: <FaFacebook />, href: "https://facebook.com/ihriyad007", label: "Facebook" },
 ];
 
 const links = [
@@ -124,11 +125,12 @@ const Footer = () => {
 
         <div className="pt-8 border-t border-divider flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-xs text-foreground-400 text-center sm:text-left">
-            &copy; {currentYear} PetPlace. All rights reserved. Built with the{" "}
+            &copy; {currentYear} PetPlace. All rights reserved by <span className="text-md font-bold text-warning italic"> I H Riyad</span> Built with the{" "}
             <span className="text-warning font-bold ">MERN</span> stack.
           </p>
 
           <div className="flex items-center gap-4">
+            connect with me on-
             {socialLinks.map((social) => (
               <a
                 key={social.label}

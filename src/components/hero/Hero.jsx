@@ -76,21 +76,21 @@ const Hero = () => {
             className="w-full md:w-1/2">
               <Button
                 size="lg"
-                className="rounded-md w-full bg-warning/20 font-semibold text-warning"
+                className="rounded-md w-full bg-warning/30 font-semibold text-warning"
               >
                 Browse Pets
               </Button>
             </Link>
-            <Link href="/dashboard/my_listing">
-            
+            <Link href="/dashboard/add_pet"
+            className="w-full md:w-1/2">
               <Button
-                variant="outline"
                 size="lg"
-                className="rounded-md w-ful text-warning"
+                className="rounded-md w-full bg-warning/10 font-semibold text-warning"
               >
-                List a Pet
+                List a pet now!
               </Button>
             </Link>
+           
           </motion.div>
         </div>
 
