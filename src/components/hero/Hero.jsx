@@ -76,7 +76,7 @@ const Hero = () => {
             className="w-full md:w-1/2">
               <Button
                 size="lg"
-                className="rounded-md w-full bg-warning/30 font-semibold text-warning"
+                className="rounded-md w-full bg-warning/30 font-semibold text-warning animate-pulse"
               >
                 Browse Pets
               </Button>

@@ -27,8 +27,8 @@ const AddPet = () => {
   };
 
   return (
-    <div className="bg-default-50/30 px-4 sm:px-6 lg:px-8 py-8">
-      <div className="max-w-3xl mx-auto bg-background border border-divider rounded-2xl p-6 md:p-10 shadow-sm">
+    <div className="bg-default-50/30">
+      <div className="w-full mx-auto bg-background border border-divider  p-6 md:p-10 shadow-sm">
         {/* Header */}
         <div className="flex items-center gap-3 border-b border-divider pb-6 mb-8">
           <div className="w-10 h-10 rounded-xl bg-warning/10 text-warning flex items-center justify-center text-xl">

@@ -78,14 +78,14 @@ const DashboardLayout = ({ children }) => {
       <div className="flex-1 flex flex-col min-w-0">
         <header className="sticky top-0 z-10 bg-background border-b border-divider px-4 py-3 flex items-center gap-3 lg:px-6">
           <button
-            className="lg:hidden text-foreground-500 hover:text-foreground"
+            className="lg:hidden text-warning hover:text-foreground"
             onClick={() => setOpen((o) => !o)}
           >
             {open ? <FaTimes /> : <FaBars />}
           </button>
-          <p className="text-sm font-semibold text-foreground">Dashboard</p>
+          <p className="text-md font-semibold text-foreground">Dashboard</p>
         </header>
-        <main className="flex-1 p-4 lg:p-8 overflow-y-auto">{children}</main>
+        <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
     </section>
   );

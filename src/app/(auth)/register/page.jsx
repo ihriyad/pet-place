@@ -68,7 +68,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center py-2 bg-default-50/50">
+    <div className="flex items-center justify-center  bg-default-50/50">
       <div className="w-full max-w-[540px] bg-background rounded-sm p-8 md:p-12">
         <div className="flex items-center  p-2 rounded-2xl">
                         <Image

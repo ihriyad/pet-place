@@ -50,24 +50,25 @@ const Navbar = () => {
             {isMenuOpen ? <RiCloseLine /> : <RiMenu2Line />}
           </button>
           <Link href={"/"}>
-          <div className="flex items-center  p-2 rounded-2xl">
-            <Image
-              src={"/logo2.png"}
-              height={30}
-              width={30}
-              alt="Logo"
-              className="text-warning"
-            ></Image>
-            <p className={`${logoFont.className} uppercase text-lg font-bold`}>
-              pet<span className="text-warning">place</span>
-            </p>
-          </div>
-        </Link>
+            <div className="flex items-center  p-2 rounded-2xl">
+              <Image
+                src={"/logo2.png"}
+                height={20}
+                width={20}
+                alt="Logo"
+                className="text-warning"
+              ></Image>
+              <p
+                className={`${logoFont.className} uppercase text-lg font-bold`}
+              >
+                pet<span className="text-warning">place</span>
+              </p>
+            </div>
+          </Link>
         </div>
 
         {/*logo for desktop */}
-          <Link href={"/"}
-          className="hidden md:flex">
+        <Link href={"/"} className="hidden md:flex">
           <div className="flex items-center  p-2 rounded-2xl">
             <Image
               src={"/logo2.png"}
@@ -112,9 +113,9 @@ const Navbar = () => {
                     <Button
                       variant="secondary"
                       size="sm"
-                      className="font-semibold text-warning"
+                      className="font-semibold rounded-md text-warning animate-bounce"
                     >
-                      Login
+                      Get Started
                     </Button>
                   </Link>
                 </>
