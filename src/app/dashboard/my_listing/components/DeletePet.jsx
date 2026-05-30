@@ -21,7 +21,7 @@ const DeletePet = ({ pet, email }) => {
             <AlertDialog.Dialog className="sm:max-w-[400px]">
               <AlertDialog.CloseTrigger />
               <AlertDialog.Header>
-                <AlertDialog.Icon status="default" />
+                <AlertDialog.Icon status="warning" />
                 <AlertDialog.Heading>
                   Delete <span className="text-warning">{pet.petName}</span> Permanently?
                 </AlertDialog.Heading>

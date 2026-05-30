@@ -34,7 +34,7 @@ const RequestsModal = ({ petId }) => {
       >
         Requests {requests.length > 0 && `(${requests.length})`}
       </Button>
-      <Modal.Backdrop variant="blur">
+      <Modal.Backdrop variant="opaque">
         <Modal.Container size="lg">
           <Modal.Dialog>
             <Modal.CloseTrigger />

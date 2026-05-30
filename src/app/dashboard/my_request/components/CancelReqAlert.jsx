@@ -27,21 +27,21 @@ const CancelReqAlert = (req) => {
             <AlertDialog.Dialog className="sm:max-w-[400px]">
               <AlertDialog.CloseTrigger />
               <AlertDialog.Header>
-                <AlertDialog.Icon status="default" />
+                <AlertDialog.Icon status="warning" />
                 <AlertDialog.Heading>
-                  Delete <span className="text-warning"></span> Permanently?
+                 Cancel Request 
                 </AlertDialog.Heading>
               </AlertDialog.Header>
               <AlertDialog.Body>
                 <p>
-                  This will permanently delete
-                  <strong></strong> and all of its data. This action cannot be
+                  This will cancel the pet adoption request
+                  and all of its data. This action cannot be
                   undone.
                 </p>
               </AlertDialog.Body>
               <AlertDialog.Footer>
                 <Button slot="close" variant="tertiary">
-                  Cancel
+                  close
                 </Button>
                 <Button
                   slot={"close"}

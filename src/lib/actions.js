@@ -1,4 +1,9 @@
+'use server'
+import { revalidatePath } from "next/cache";
+
+
 export const addPetInfo = async (formData) => {
+  
   const newPet = Object.fromEntries(formData.entries());
   console.log(newPet);
   const res = await fetch(`${process.env.NEXT_PUBLIC_SEVER_URL}/all_pets`, {
@@ -8,6 +13,7 @@ export const addPetInfo = async (formData) => {
     },
     body: JSON.stringify(newPet),
   });
+  revalidatePath("/all_pets");
   const data = await res.json();
   return data;
   // console.log("data submitted", data);
